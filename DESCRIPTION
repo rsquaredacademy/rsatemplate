@@ -1,0 +1,21 @@
+Package: rsatemplate
+Type: Package
+Title: Rsquared Academy pkgdown Template
+Version: 0.1.0
+Authors@R:
+    person("Aravind", "Hebbali", email = "aravindhebbali@rsquaredacademy.com",
+           role = c("aut", "cre"))
+Description: A pkgdown template package that gives Rsquared Academy R
+    packages a shared visual identity: Bootstrap 5 theming, a structured
+    workbench home page, card-style function reference, dark mode, a
+    configurable course card, a branded 404 page, and the Rsquared
+    Academy site-kit. It also provides a post-build helper for canonical
+    links and a clean sitemap.
+License: MIT + file LICENSE
+URL: https://github.com/rsquaredacademy/rsatemplate
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Suggests:
+    pkgdown (>= 2.1.0)
+Config/Needs/website: rsquaredacademy/rsatemplate

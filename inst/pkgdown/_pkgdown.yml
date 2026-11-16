@@ -1,0 +1,47 @@
+template:
+  bootstrap: 5
+  light-switch: true
+  theme: github-light
+  theme-dark: github-dark
+  bslib:
+    primary: "#2563eb"
+    bg: "#ffffff"
+    fg: "#0f172a"
+    base_font:
+      google: "Source Sans 3"
+    heading_font:
+      google: "Schibsted Grotesk"
+    code_font:
+      google: "JetBrains Mono"
+    border-radius: "0.625rem"
+    card-border-radius: "1rem"
+    navbar-light-bg: "#ffffff"
+    navbar-dark-bg: "#0b1220"
+  params:
+    # Absolute site URL, e.g. https://pkg.rsquaredacademy.com. Used by the
+    # canonical tag and documented for fix_site(). Required for production.
+    site_url: ""
+    # Optional hero paragraph on the home page.
+    hero_description: "Open-source R package documentation from Rsquared Academy."
+    # Home sidebar course card. Set both values per package.
+    course_topic: "this package"
+    course_url: "https://app.rsquaredacademy.com/"
+    # Optional development install line in the hero card, e.g.
+    # "rsquaredacademy/olsrr". Leave empty to hide it.
+    dev_repo: ""
+    # Optional per-article "Practise this" boxes. Off by default. Add one
+    # entry per article that should show a box:
+    # practise:
+    #   articles:
+    #     - file: variable_selection.html
+    #       topic: variable selection
+    #       url: https://app.rsquaredacademy.com/courses/ols-regression
+
+navbar:
+  structure:
+    left: [home, reference, articles, news]
+    right: [search, github, lightswitch]
+  components:
+    home:
+      text: Home
+      href: index.html

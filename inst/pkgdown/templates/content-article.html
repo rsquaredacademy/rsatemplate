@@ -1,0 +1,61 @@
+{{^as_is}}$for(header-includes)$
+$header-includes$
+$endfor${{/as_is}}
+
+<div class="row rsa-article-grid">
+  <main id="main" class="col-md-9 rsa-article-main">
+    <div class="page-header rsa-page-header">
+      {{#logo}}<img src="{{logo.src}}" class="logo" alt="" >{{/logo}}
+      <h1>{{{pagetitle}}}</h1>
+      $if(subtitle)$
+      <p class="rsa-article-subtitle">$subtitle$</p>
+      $endif$
+      $for(author)$
+      $if(author.name)$
+      <p class="rsa-article-author">$author.name$</p>
+      $endif$
+      $endfor$
+
+      $if(date)$
+      <p class="rsa-article-date">$date$</p>
+      $endif$
+
+      {{#source}}<small class="dont-index">{{{.}}}</small>{{/source}}
+      <div class="d-none name"><code>{{filename}}</code></div>
+    </div>
+
+    $for(include-before)$
+    $include-before$
+    $endfor$
+
+    $if(abstract)$
+    <div class="abstract">
+      <p class="abstract">{{#translate}}{{abstract}}{{/translate}}</p>
+      $abstract$
+    </div>
+    $endif$
+
+$body$
+
+    {{#yaml}}{{#practise}}{{#articles}}
+    <div class="rsa-practise" data-rsa-practise data-file="{{file}}" hidden>
+      <span class="rsa-practise-kicker">Practise this</span>
+      <h2 class="rsa-practise-title">Learn {{topic}} hands-on</h2>
+      <p class="rsa-practise-desc">Try the ideas from this article in a free interactive course that runs in your browser. Guided exercises, instant feedback, no install.</p>
+      <a class="rsa-practise-link" href="{{url}}?utm_source=pkgdown&amp;utm_medium=article_box&amp;utm_campaign={{#package}}{{name}}{{/package}}" target="_blank" rel="noopener">Launch interactive exercises <span aria-hidden="true">→</span></a>
+    </div>
+    {{/articles}}{{/practise}}{{/yaml}}
+  </main>
+
+  {{#toc}}
+  <aside class="col-md-3 rsa-article-toc">
+    <nav id="toc" aria-label="{{#translate}}{{toc}}{{/translate}}">
+      <h2>{{#translate}}{{on_this_page}}{{/translate}}</h2>
+    </nav>
+  </aside>
+  {{/toc}}
+</div>
+
+$for(include-after)$
+$include-after$
+$endfor$

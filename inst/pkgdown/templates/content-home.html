@@ -1,0 +1,47 @@
+<section class="rsa-hero">
+  <div class="rsa-hero-grid">
+    <div class="rsa-hero-main">
+      <div class="rsa-badges" aria-label="Package status">
+        <span class="rsa-badge rsa-badge-version">CRAN v{{#package}}{{version}}{{/package}}</span>
+        <span class="rsa-badge">MIT</span>
+        <span class="rsa-badge">R package</span>
+      </div>
+      <h1 class="rsa-hero-title">{{{pagetitle}}}</h1>
+      <p class="rsa-hero-desc">{{#yaml}}{{#hero_description}}{{.}}{{/hero_description}}{{/yaml}}</p>
+      <div class="rsa-hero-actions">
+        <a class="rsa-btn rsa-btn-primary" href="#rsa-quickstart">Get Started</a>
+        <a class="rsa-btn rsa-btn-secondary" href="{{#site}}{{root}}{{/site}}reference/index.html">Function Reference</a>
+      </div>
+    </div>
+
+    <aside class="rsa-install-card" id="rsa-install" aria-label="Quick install">
+      <div class="rsa-install-head">
+        <span>Quick Install</span>
+        <span class="rsa-mono">R &gt;= 3.3</span>
+      </div>
+      <pre class="rsa-install-pre"><code>install.packages("{{#package}}{{name}}{{/package}}")</code></pre>
+      {{#yaml}}{{#dev_repo}}
+      <p class="rsa-install-dev">Bleeding edge: <code>pak::pak("{{.}}")</code></p>
+      {{/dev_repo}}{{/yaml}}
+      <p class="rsa-install-note">Then read the <a href="{{#site}}{{root}}{{/site}}reference/index.html">function reference</a> or a guide.</p>
+    </aside>
+  </div>
+</section>
+
+<div class="row rsa-home-grid" id="rsa-quickstart">
+  <main id="main" class="col-md-9 rsa-home-main">
+{{{index}}}
+  </main>
+
+  <aside class="col-md-3 rsa-home-sidebar">
+    <div class="rsa-course-card">
+      <span class="rsa-course-kicker">Free interactive course</span>
+      <h2 class="rsa-course-title">Learn {{#yaml}}{{#course_topic}}{{.}}{{/course_topic}}{{/yaml}} hands-on</h2>
+      <p class="rsa-course-desc">Free interactive course, runs in your browser. Practise each concept with guided feedback and real data.</p>
+      <a class="rsa-course-link" href="{{#yaml}}{{#course_url}}{{.}}{{/course_url}}{{/yaml}}?utm_source=pkgdown&amp;utm_medium=sidebar&amp;utm_campaign={{#package}}{{name}}{{/package}}" target="_blank" rel="noopener">Start interactive course →</a>
+    </div>
+{{#sidebar}}
+{{{.}}}
+{{/sidebar}}
+  </aside>
+</div>

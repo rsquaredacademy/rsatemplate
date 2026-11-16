@@ -1,0 +1,35 @@
+<div class="rsa-page-header">
+  <h1>{{{pagetitle}}}</h1>
+  <p class="rsa-page-lede">Every function in the package, grouped by task. Use the filters to narrow the list.</p>
+</div>
+
+<div class="rsa-ref-chips" role="group" aria-label="Filter reference by category">
+  <button type="button" class="rsa-chip is-active" data-rsa-ref-filter="all">All</button>
+  {{#rows}}{{#title}}<button type="button" class="rsa-chip" data-rsa-ref-filter="{{slug}}">{{.}}</button>{{/title}}{{/rows}}
+</div>
+
+<div class="rsa-ref-grid">
+{{#rows}}
+  {{#title}}<h2 class="rsa-ref-heading" id="{{slug}}" data-rsa-ref-section="{{slug}}">{{.}}</h2>{{/title}}
+  {{#subtitle}}<h3 class="rsa-ref-subheading" data-rsa-ref-section="{{slug}}">{{.}}</h3>{{/subtitle}}
+  {{#desc}}<div class="rsa-ref-desc" data-rsa-ref-section="{{slug}}">{{{desc}}}</div>{{/desc}}
+  {{#topics}}
+  <article class="rsa-ref-card">
+    <div class="rsa-ref-card-head">
+      {{#aliases}}<code class="rsa-ref-name"><a href="{{path}}">{{.}}</a></code> {{/aliases}}
+      {{#lifecycle}}<span class="rsa-lifecycle">{{.}}</span>{{/lifecycle}}
+    </div>
+    <p class="rsa-ref-card-title">{{{title}}}</p>
+    <div class="rsa-ref-card-foot"><a href="{{path}}">Documentation <span aria-hidden="true">→</span></a></div>
+  </article>
+  {{/topics}}
+{{/rows}}
+</div>
+
+<aside class="rsa-ref-sidebar">
+  <div class="rsa-ref-note">
+    <strong>Looking for a guide?</strong>
+    <p>Articles walk through complete analyses with code and output.</p>
+    <a href="{{#site}}{{root}}{{/site}}articles/index.html">Browse articles <span aria-hidden="true">→</span></a>
+  </div>
+</aside>

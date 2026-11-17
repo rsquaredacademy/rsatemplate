@@ -9,14 +9,18 @@
 #      final lowercase, extensionless URL that Netlify serves;
 #   3. rewrites sitemap.xml so it lists only reader-facing pages that
 #      really exist (no 404, AGENTS, ISSUE_TEMPLATE or verification file);
-#   4. points robots.txt at the real sitemap URL.
+#   4. points robots.txt at the real sitemap URL;
+#   5. writes Netlify `_redirects` rules that return 404 for repository and
+#      agent-instruction files, even if a later build re-renders them.
 #
 # The function is idempotent.
 
 #' Post-process a built pkgdown site
 #'
 #' Adds canonical links, removes admin pages and verification files from the
-#' sitemap, and writes the correct sitemap URL into `robots.txt`. It is
+#' sitemap, writes the correct sitemap URL into `robots.txt`, and writes
+#' Netlify `_redirects` rules that return 404 for agent-instruction and
+#' repository files (AGENTS, GEMINI, CLAUDE, README, build scripts). It is
 #' designed for sites built with the `rsatemplate` pkgdown template and is
 #' idempotent, so it can run after every build.
 #'
@@ -94,6 +98,7 @@ fix_site <- function(path = "docs", url = NULL) {
 
   kept <- rewrite_sitemap(path, url)
   rewrite_robots(path, url)
+  write_redirects(path)
 
   invisible(list(
     canonical = added,
@@ -142,13 +147,47 @@ site_url_from_config <- function(path) {
 remove_admin_pages <- function(path) {
   stale <- file.path(
     path,
-    c("AGENTS.html", "AGENTS.md", "ISSUE_TEMPLATE.html", "ISSUE_TEMPLATE.md")
+    c(
+      "AGENTS.html", "AGENTS.md", "GEMINI.html", "GEMINI.md",
+      "CLAUDE.html", "CLAUDE.md", "ISSUE_TEMPLATE.html", "ISSUE_TEMPLATE.md"
+    )
   )
   stale <- stale[file.exists(stale)]
   if (length(stale) > 0L) {
     file.remove(stale)
   }
   basename(stale)
+}
+
+# Paths that must never be served from a published site: contributor and
+# agent instruction files, repository metadata and build tooling.
+blocked_paths <- c(
+  "/AGENTS.html", "/AGENTS.md", "/agents", "/agents.html",
+  "/GEMINI.html", "/GEMINI.md", "/gemini", "/gemini.html",
+  "/CLAUDE.html", "/CLAUDE.md", "/claude", "/claude.html",
+  "/README.md", "/CONTRIBUTING.md", "/package.json", "/package-lock.json",
+  "/build.mjs", "/check.mjs", "/hash.mjs"
+)
+
+redirects_begin <- "# >>> rsatemplate: blocked paths (do not edit inside this block)"
+redirects_end <- "# <<< rsatemplate: blocked paths"
+
+# Keep one managed block in `_redirects`; lines outside it are preserved.
+write_redirects <- function(path) {
+  file <- file.path(path, "_redirects")
+  lines <- if (file.exists(file)) readLines(file, warn = FALSE) else character()
+  begin <- which(lines == redirects_begin)
+  end <- which(lines == redirects_end)
+  if (length(begin) == 1L && length(end) == 1L && end > begin) {
+    lines <- lines[-seq(begin, end)]
+  }
+  block <- c(
+    redirects_begin,
+    sprintf("%-20s /404.html   404!", blocked_paths),
+    redirects_end
+  )
+  writeLines(c(block, lines), file, useBytes = TRUE)
+  invisible(file)
 }
 
 is_verification_file <- function(path) {

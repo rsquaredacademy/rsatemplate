@@ -9,9 +9,9 @@ fix_site(path = "docs", url = NULL)
 \arguments{
 \item{path}{Path to the built site, usually \code{"docs"}.}
 
-\item{url}{Site URL, without a trailing slash. When \code{NULL}, the URL is
-read from the first \verb{<loc>} entry in \code{sitemap.xml}, or from the
-\code{url:} field in the package's \code{_pkgdown.yml}.}
+\item{url}{Site URL, without a trailing slash. When \code{NULL}, the URL is read
+from the first \verb{<loc>} entry in \code{sitemap.xml}, or from the \verb{url:} field in
+the package's \verb{_pkgdown.yml}.}
 }
 \value{
 Invisibly, a list with the number of canonical links added and the
@@ -19,7 +19,9 @@ number of sitemap entries kept.
 }
 \description{
 Adds canonical links, removes admin pages and verification files from the
-sitemap, and writes the correct sitemap URL into \code{robots.txt}. It is
+sitemap, writes the correct sitemap URL into \code{robots.txt}, and writes
+Netlify \verb{_redirects} rules that return 404 for agent-instruction and
+repository files (AGENTS, GEMINI, CLAUDE, README, build scripts). It is
 designed for sites built with the \code{rsatemplate} pkgdown template and is
 idempotent, so it can run after every build.
 }

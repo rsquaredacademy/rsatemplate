@@ -1,7 +1,7 @@
 Package: rsatemplate
 Type: Package
 Title: Rsquared Academy pkgdown Template
-Version: 0.1.0
+Version: 0.1.1
 Authors@R:
     person("Aravind", "Hebbali", email = "aravindhebbali@rsquaredacademy.com",
            role = c("aut", "cre"))
@@ -15,7 +15,7 @@ License: MIT + file LICENSE
 URL: https://github.com/rsquaredacademy/rsatemplate
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Suggests:
     pkgdown (>= 2.1.0)
 Config/Needs/website: rsquaredacademy/rsatemplate
+Config/roxygen2/version: 8.1.1

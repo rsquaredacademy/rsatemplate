@@ -948,6 +948,12 @@ html:has(footer .rsa-footer [data-rsa-signup]) #main [data-rsa-signup] {
 .rsa-footer-status:empty { display: none; }
 .rsa-footer-status.rsa-signup__status--error { color: var(--danger); }
 
+@media (min-width: 992px) {
+  .rsa-footer { padding: 16px 0; }
+  .rsa-footer-brand { gap: 3px; }
+  .rsa-footer-links { margin-top: 3px; }
+}
+
 .rsa-footer-signup .rsa-signup {
   background: var(--bg);
   border: 1px solid var(--line);

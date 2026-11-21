@@ -2,7 +2,7 @@
   <div class="rsa-hero-grid">
     <div class="rsa-hero-main">
       <div class="rsa-badges" aria-label="Package status">
-        <span class="rsa-badge rsa-badge-version">CRAN v{{#package}}{{version}}{{/package}}</span>
+        <span class="rsa-badge rsa-badge-version">{{#development}}{{#in_dev}}Development{{/in_dev}}{{^in_dev}}CRAN{{/in_dev}}{{/development}} v{{#package}}{{version}}{{/package}}</span>
         <span class="rsa-badge">MIT</span>
         <span class="rsa-badge">R package</span>
       </div>

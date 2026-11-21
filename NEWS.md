@@ -1,3 +1,8 @@
+# rsatemplate 0.1.2
+
+* Use one compact email signup in a full-width footer and suppress duplicate
+  README signup cards when the footer is present.
+
 # rsatemplate 0.1.1
 
 * `fix_site()` writes a managed block of Netlify `_redirects` rules that return
